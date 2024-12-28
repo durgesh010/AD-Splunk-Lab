@@ -11,7 +11,7 @@ Deployed Windows Server 2025, Windows 10, and Kali Linux as virtual machines on 
 Configured the network in NAT mode to isolate the machines from external networks while allowing communication between them.
 
 Splunk Installation:
-Installed Splunk on one of the virtual machines.
+Installed Splunk on The Host machine.
 Enabled log forwarding from both Windows Server and Windows 10 to Splunk to centralize log collection for analysis.
 
 Active Directory Setup:
