@@ -1,1 +1,106 @@
 
+# VMware Pro Lab Setup for Security Testing
+
+This document outlines the steps to configure a secure virtual lab environment using VMware Workstation Pro for security testing purposes.
+
+## Network Details
+
+* Network Type: NAT (Network Address Translation)
+* Subnet: 192.168.21.0/24
+* DHCP: Enabled (Automatic IP assignment)
+
+## Virtual Machines
+
+### 1. Windows 10 Client
+
+**Local User Details:**
+
+* Username: target
+* Password: Password1234@ (**Note:** This is a placeholder for a strong password)
+
+**Static IP Configuration:**
+
+* IPv4 Address: 192.168.21.10
+* Gateway: 192.168.21.2
+
+**Log Generation and Sharing:**
+
+* Install the following tools in endpoints/windows hosts:
+    * Universal Splunk Forwarder
+    * Sysmon (download from https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+    * Sysmon Olaf Config (download from https://raw.githubusercontent.com/olafhartong/sysmon-modular/refs/heads/master/sysmonconfig.xml)
+* **Sysmon Setup Commands:**
+    ```powershell
+    cd C:\Users\target\Downloads\Sysmon
+    .\Sysmon64.exe -i ..\sysmonconfig.xml
+    ```
+* **Splunk Forwarder Configuration:**
+    * Modify the `inputs.conf` file located in `C:\Program Files\SplunkUniversalForwarder\etc\system\local` according to Splunk documentation.
+    * Restart the Splunk Forwarder service after making changes.
+
+### 2. Windows Server 2025
+
+**Static IP Configuration:**
+
+* IPv4 Address: 192.168.21.20
+* Gateway: 192.168.21.2
+
+### 3. Kali Linux for Attacking
+
+**Tools and Scripts:**
+
+* Install security testing tools such as Hydra, Nmap, Metasploit Framework, John the Ripper, and custom scripts for simulating attack vectors.
+
+### 4. Splunk Server (Main System)
+
+**Splunk User Details:**
+
+* Username: Durgesh
+* Password: *********** 
+
+**Settings:**
+
+* Open the Splunk web portal and navigate to:
+    * Settings -> Forwarding and Receiving -> Receiving Configuration
+    * Add port 9997 to receive logs from endpoints.
+* Create a new index named "endpoint" in Splunk for storing logs.
+
+## Active Directory Domain Services (AD DS) Setup (Optional)
+
+**Admin Details:**
+
+* Username: Administrator
+* Password: Password1234@ 
+
+**Domain Details:**
+* Domain Name: dev010.local
+
+**Organizational Units (OUs):**
+
+* Create OUs named "IT" and "HR" to manage user accounts and group policies.
+
+**Users:**
+
+* **IT OU:**
+    * John Snow (jsnow) - Password: Password1234 (**Note:** This is a placeholder for a strong password)
+* **HR OU:**
+    * Akash Kumar (akash-k) - Password: Password1234@ (**Note:** This is a placeholder for a strong password)
+
+## Objectives
+
+1. Set up Kali Linux and security testing tools.
+2. Perform a brute-force attack with Hydra (**Note:** This should be done in a controlled environment with proper authorization).
+3. View logs and telemetry data in Splunk for security analysis.
+4. Install and configure Atomic Red Team for simulating real-world attack techniques.
+5. Run Atomic Red Team tests to evaluate the lab environment's security posture.
+
+## Steps
+
+1. **Enable RDP (Remote Desktop Protocol) on Windows Server or Windows 10** for remote access during testing (System Settings -> Advanced System Settings -> Enable Remote Connections for users).
+2. **Create a Password Wordlist** for brute-force attacks using appropriate tools (**Note:** Use strong passwords in production environments).
+3. **Log Analysis/Monitoring with Splunk:**
+    * Use search queries like `index="endpoint" akash-k` to analyze user activity logs in Splunk.
+    * Look for event codes indicating failed login attempts in the "Fields" section.
+
+4. **Install Atomic Red Team and Emulate Threats:**
+    * Install Atomic Red Team using the following PowerShell
