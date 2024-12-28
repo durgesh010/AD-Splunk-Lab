@@ -1,6 +1,8 @@
 Project Overview:
 
-This project is designed to simulate and detect cyber attacks in an isolated virtual lab environment using VMware, Windows Server, Windows 10, Kali Linux, Splunk, and Atomic Red Team. The objective is to perform various penetration testing activities, detect attacks, and analyze the associated logs using Splunk.
+This project is designed to simulate and detect cyber attacks in an isolated virtual lab environment using VMware,
+Windows Server, Windows 10, Kali Linux, Splunk, and Atomic Red Team. The objective is to perform various
+penetration testing activities, detect attacks, and analyze the associated logs using Splunk.
 
 Environment Setup:
 
