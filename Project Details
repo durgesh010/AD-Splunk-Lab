@@ -1,0 +1,39 @@
+Project Overview:
+
+This project is designed to simulate and detect cyber attacks in an isolated virtual lab environment using VMware, Windows Server, Windows 10, Kali Linux, Splunk, and Atomic Red Team. The objective is to perform various penetration testing activities, detect attacks, and analyze the associated logs using Splunk.
+
+Environment Setup:
+
+VMware Network Configuration:
+Deployed Windows Server 2025, Windows 10, and Kali Linux as virtual machines on VMware.
+Configured the network in NAT mode to isolate the machines from external networks while allowing communication between them.
+
+Splunk Installation:
+Installed Splunk on one of the virtual machines.
+Enabled log forwarding from both Windows Server and Windows 10 to Splunk to centralize log collection for analysis.
+
+Active Directory Setup:
+Installed and configured Active Directory (AD) on Windows Server to simulate a real-world enterprise environment.
+Joined Windows 10 to the AD domain to replicate user authentication scenarios.
+
+Attack Simulations:
+
+Atomic Red Team Testing:
+Installed Atomic Red Team on the environment to emulate a variety of attacks.
+Ran several tests based on Atomic Red Team’s attack scenarios, including credential dumping, lateral movement, and privilege escalation.
+
+RDP Brute-force Attack:
+Utilized Hydra from Kali Linux to perform a brute-force attack against Windows 10's RDP service.
+Created a wordlist and targeted RDP user login with Hydra to simulate password spraying and brute-force attacks.
+
+Log Analysis:
+Splunk Log Collection:
+Configured Splunk to receive and index logs from Windows Server and Windows 10, including system events, security logs, and RDP login attempts.
+
+Attack Detection:
+Analyzed the logs in Splunk to identify traces of the brute-force attack, as well as other simulated attacks from Atomic Red Team.
+Focused on detecting anomalies such as unusual login attempts, authentication failures, and signs of lateral movement.
+
+
+
+
