@@ -1,0 +1,40 @@
+Atomic Red Team Tests
+
+Test 1: T1136.001 - Create Account
+
+Objective: Simulate the creation of a new user account in the target system to mimic an attacker's persistence method or privilege escalation technique.
+Tool Used: Atomic Red Team (ART)
+
+Steps Performed:
+Executed Atomic Red Team's predefined test for creating a user account using the command Invoke-AtomicTests T1136.001.
+
+powershell Command:
+Invoke-AtomicTests T1136.001
+
+Log Analysis:
+Monitored logs in Splunk for EventCode 4720 (Account Created).
+However, the log observed was EventCode 4726 (Account Deleted), which indicates that the account was deleted after creation.
+Outcome: The test created a new account and then deleted it, as indicated by EventCode 4726. This demonstrates the detection of both account creation and deletion in Splunk.
+Video Link: https://youtu.be/mQhaeqktq0M
+
+
+Test 2: T1059.001 - PowerShell with Mimikatz and BloodHound
+
+Objective: Simulate the execution of a PowerShell-based attack, specifically leveraging Mimikatz and BloodHound, to perform credential dumping and privilege escalation.
+Tool Used: Atomic Red Team (ART)
+
+Steps Performed:
+Executed Atomic Red Team's predefined test for PowerShell.
+
+Command:
+Invoke-AtomicTests T1059.001
+
+Log Analysis:
+Monitored logs in Splunk for any references to Mimikatz and BloodHound activity.
+
+Specifically searched for Mimikatz logs by running the following Splunk query:
+index="endpoint" mimikatz
+
+Observed relevant logs indicating the execution of Mimikatz and activity related to BloodHound.
+Outcome: Successfully executed a PowerShell-based attack using Mimikatz for credential dumping and BloodHound for privilege escalation. Logs indicating this activity were detected in Splunk.
+Video Link: https://youtu.be/Fh_NRtVoujA
